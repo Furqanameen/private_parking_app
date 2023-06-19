@@ -7,7 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # if there is no OAuth application created, create them
-Doorkeeper::Application.create(name: 'angular', redirect_uri: '', scopes: '') if Doorkeeper::Application.count.zero?
+# Doorkeeper::Application.create(name: 'angular', redirect_uri: '', scopes: '') if Doorkeeper::Application.count.zero?
 
 # Doorkeeper::Application.find_by(name: "angular").uid
 # Doorkeeper::Application.find_by(name: "angular").secret
@@ -18,3 +18,17 @@ Doorkeeper::Application.create(name: 'angular', redirect_uri: '', scopes: '') if
 # redirect_uri: "",
 # scopes: "",
 # confidential: true,
+
+
+
+(1..10).each do |i|
+	slot = Slot.last
+	open_time = slot.open_time + 1.hour
+	close_time = slot.close_time + 1.hour
+	name = Faker::Name.name
+	puts "Slote generated #{i*4}"
+	Slot.create(name: name ,price: rand(500..1000), features: "car_type", slot_time: "morning", is_available: true, open_time: open_time, close_time: close_time)
+	Slot.create(name: name,price: rand(500..1000), features: "disabled_people", slot_time: "evening", is_available: true, open_time: open_time, close_time: close_time)
+	Slot.create(name: name,price: rand(500..1000), features: "disabled_people", slot_time: "evening", is_available: true, open_time: open_time, close_time: close_time)
+	Slot.create(name: name,price: rand(500..1000), features: "has_shade", slot_time: "evening", is_available: true, open_time: open_time, close_time: close_time)
+end
