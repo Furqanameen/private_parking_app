@@ -33,9 +33,13 @@ class SlotDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    name
+    open_time
     close_time
     features
     is_available
+    slot_time
+    price
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

@@ -31,8 +31,13 @@ class ReservationDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     charges
+    vehicle_number
+    status
+    number_of_hours
     check_in
     check_out
+    user
+    slot
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
