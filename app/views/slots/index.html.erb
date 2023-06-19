@@ -1,0 +1,44 @@
+  <h2>List of Available slots</h2>
+    <%= form_with  url: slots_path,  method: :get,  html: {class:'my-lg-0 form-inline px-3'} do |form| %>
+
+      <%= select_tag :features, options_for_select(Slot.features.collect {|k,v| [k.humanize, k]}), include_blank: "Search by features"%>
+      <%= form.datetime_field :open_time, class: 'form-control dates rounded-0 mt-3 col-1', value: params[:open_time] %>
+      <%= form.datetime_field :close_time, class: 'form-control dates rounded-0 mt-3 col-1', value: params[:close_time] %>
+      
+      <div class="btn-group mt-3 ">
+        <%= form.submit 'Search btn', class: 'btn btn-light btn-block' do %>
+          Search <i class="fa fa-search"></i>
+        <% end %>
+      </div>
+    <% end %>
+<table class="footable table table-bordered" data-page-size="15">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Open Time</th>
+      <th>Close Time</th>
+      <th>Slot Feature</th>
+      <th>Slot </th>
+      <th>Action </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @slots.each do |slot| %>
+      <tr >
+        <td>
+          <%= slot&.name&.humanize %>
+        </td>
+        <td><%= slot&.price %></td>
+        <td><%= slot&.open_time.strftime("%b-%d-%H:%M") %></td>
+        <td><%= slot&.close_time.strftime("%b-%d-%H:%M") %></td>
+        <td><%= slot&.features %></td>
+        <td><%= slot&.slot_time %></td>
+        <td>
+          <%= link_to 'Reserve this slot ', book_slot_slot_path(slot.id), method: :delete, class: "btn-white btn btn-xs" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Check reservered Reservations', reservations_path, class: "btn-white btn btn-xs" %>

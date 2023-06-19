@@ -1,0 +1,38 @@
+<%= form_for @reservation, url: slots_path do |form| %>
+  <% if @reservation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+        <% @reservation.errors.full_messages.each do |msg| %>
+          
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>  
+
+  <div class="form-group">
+    <%= form.label :number_of_hours, style: "display: block" %>
+    <%= form.number_field :number_of_hours, class: "form-control", max: 12, min: 1   %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :vehicle_number, style: "display: block" %>
+    <%= form.text_field :vehicle_number , class: "form-control"%>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :Booking_status, style: "display: block" %>
+    <%= form.select(:status, Reservation.statuses.collect {|k,v| [k.humanize,k]}, {:prompt => 'Select Reservation Type'},{ :class => 'form-control' }) %>
+  </div>
+
+  <%= form.hidden_field :slot_id, value: "#{params[:id]}" %>
+  <%= form.hidden_field :user_id, value: "#{current_user.id}" %>
+
+  <div class="form-group">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to slots page', slots_path, class: "btn-white btn btn-xs" %>

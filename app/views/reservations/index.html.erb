@@ -1,0 +1,44 @@
+<div class="container">
+  <h2>Customer Reservations</h2>
+<table class="footable table table-bordered" data-page-size="15">
+  <thead>
+    <tr>
+      <th>number of hours</th>
+      <th>Charges</th>
+      <th>Reservations Status</th>
+      <th>Vehicle Number</th>
+      <th>Slot Name</th>
+      <th>Edits </th>
+      <th>Check In </th>
+      <th>Check Out </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reservations.each do |reservation| %>
+      <tr >
+        <td><%= reservation&.number_of_hours %></td>
+        <td><%= reservation&.charges %></td>
+        <td><%= reservation&.status %></td>
+        <td><%= reservation&.vehicle_number %></td>
+        <td><%= reservation&.slot.name %></td>
+
+        <td><%= link_to 'Edit/Cancel', edit_reservation_path(reservation.id), method: :delete, class: "btn-white btn btn-xs" %></td>
+          
+          <td><% if reservation.check_in.present? %>
+            <p>Checked In</p>
+          <% else %>
+            <%= link_to 'Check In', check_in_reservation_path(reservation.id), method: :delete, class: "btn-white btn btn-xs" %>
+          <% end %>
+        </td>
+        <td>  <% if reservation.check_out.present? %>
+            <p>Checked Out</p>
+          <% else %>
+            <%= link_to 'Check Out', check_out_reservation_path(reservation.id), method: :delete, class: "btn-white btn btn-xs" %>
+          <% end %>          
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Back to slots page', slots_path, class: "btn-white btn btn-xs" %>
+</div>
