@@ -11,7 +11,6 @@
       </ul>
     </div>
   <% end %>  
-  <%#  binding.pry %>
   <div class="form-group">
     <%= form.label :number_of_hours, style: "display: block" %>
     <%= form.number_field :number_of_hours, class: "form-control", max: 12, min: 1 , require: true  %>
@@ -27,7 +26,7 @@
     <%= form.select(:status, Reservation.statuses.collect {|k,v| [k.humanize,k]}, {:prompt => 'Select Reservation Type'},{ :class => 'form-control' }) %>
   </div>
 
-  <%= form.hidden_field :slot_id, value: "#{params[:id]}" %>
+  <%= form.hidden_field :slot_id, value: set_slot_id %>
   <%= form.hidden_field :user_id, value: "#{current_user.id}" %>
 
   <div class="form-group">

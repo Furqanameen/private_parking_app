@@ -46,7 +46,7 @@ class Reservation < ApplicationRecord
 
   def check_existed_reservation_with_same_datetime
     slot = Slot.find_by(id: slot_id)
-    if Slot.joins(:reservation).where(reservation: {user_id: user.id}).where("open_time = ? AND close_time = ? AND is_available = ? ", slot.open_time, slot.close_time, false).any?
+    if Slot.joins(:reservation).where(reservation: {user_id: user.id}).where("open_time = ? AND close_time = ? AND is_available = ? ", slot&.open_time, slot&.close_time, false).any?
       errors.add(:open_time, 'with this open time and closing you already booked a slot')
     end
   end
