@@ -33,6 +33,9 @@ Ruby
 Postgresql
 Devise
 
+#ERD
+https://github.com/Furqanameen/private_parking_app/blob/master/erd.pdf
+
 Getting Started
 Here are the steps to follow in order to get this project on your local computer.
 
